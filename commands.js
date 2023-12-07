@@ -3,76 +3,86 @@
 import { program } from "commander";
 import inquirer from "inquirer";
 import {
-  addCustomer,
-  findCustomer,
-  updateCustomer,
-  removeCustomer,
-  listCustomers,
+  addCar,
+  findCar,
+  updateCar,
+  removeCar,
+  listCars,
 } from "./index.js";
 
 // Customer questions
 const questions = [
   {
     type: "input",
-    name: "firstname",
-    message: "Customer first name",
+    name: "bodyStyle",
+    message: "Style of car e.g Hatchback, Sedan, Coupe",
   },
   {
     type: "input",
-    name: "lastname",
-    message: "Customer last name",
+    name: "make",
+    message: "Make of car",
   },
   {
     type: "input",
-    name: "phone",
-    message: "Customer phone number",
+    name: "model",
+    message: "Car model",
   },
   {
     type: "input",
-    name: "email",
-    message: "Customer email address",
+    name: "year",
+    message: "Year of manufacture",
+  },
+  {
+    type: "input",
+    name: "price",
+    message: "Listing price",
+  },
+  {
+    type: "input",
+    name: "image",
+    message: "Link to car listing",
   },
 ];
 
-program.version("1.0.0").description("Client Management System");
+program.version("1.0.0").description("Car Stock Mangement System");
 
 // Add command
 program
   .command("add")
   .alias("a")
-  .description("Add a customer")
+  .description("Add a car")
   .action(() => {
-    inquirer.prompt(questions).then((answers) => addCustomer(answers));
+    inquirer.prompt(questions).then((answers) => addCar(answers));
   });
 
 //   Find command
 program
-  .command("find <name>")
+  .command("find <makeOrModel>")
   .alias("f")
-  .description("Find a customer")
-  .action((name) => findCustomer(name));
+  .description("Find a car")
+  .action((makeOrModel) => findCar(makeOrModel));
 
 // Update command
 program
   .command("update <_id>")
   .alias("u")
-  .description("Update a customer")
+  .description("Update a car")
   .action((_id) => {
-    inquirer.prompt(questions).then((answers) => updateCustomer(_id, answers));
+    inquirer.prompt(questions).then((answers) => updateCar(_id, answers));
   });
 
 // Remove command
 program
   .command("remove <_id>")
   .alias("r")
-  .description("Remove a customer")
-  .action((_id) => removeCustomer(_id));
+  .description("Remove a car")
+  .action((_id) => removeCar(_id));
 
 // List command
 program
   .command("list")
   .alias("l")
-  .description("List all customers")
-  .action(() => listCustomers());
+  .description("List all car")
+  .action(() => listCars());
 
 program.parse(process.argv);

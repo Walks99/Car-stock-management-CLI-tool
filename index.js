@@ -2,53 +2,53 @@ import mongoose from "mongoose";
 // Map global promise - get rid of warnign
 mongoose.Promise = global.Promise;
 // Connect to DB
-const db = mongoose.connect("mongodb://localhost:27017/customercli");
+const db = mongoose.connect("mongodb://localhost:27017/turners");
 
-// Import model
-import Customer from "./models/customer.js";
+// Import schema
+import Cars from "./models/carStockSchema.js";
 
-// Add customer
-export const addCustomer = (customer) => {
-  Customer.create(customer).then((customer) => {
-    console.info("New customer added");
+// Add car
+export const addCar = (car) => {
+  Cars.create(car).then((car) => {
+    console.info("New car added");
     mongoose.disconnect();
   });
 };
 
-// Find customer
-export const findCustomer = (name) => {
+// Find car
+export const findCar = (makeOrModel) => {
   // Make case insensitive
-  const search = new RegExp(name, "i");
-  Customer.find({ $or: [{ firstname: search }, { lastname: search }] }).then(
-    (customer) => {
-      console.info(customer);
-      console.info(`${customer.length} matches`);
+  const search = new RegExp(makeOrModel, "i");
+  Cars.find({ $or: [{ make: search }, { model: search }] }).then(
+    (car) => {
+      console.info(car);
+      console.info(`${car.length} matches`);
       mongoose.disconnect();
     }
   );
 };
 
-// Update a customer
-export const updateCustomer = (_id, customer) => {
-  Customer.updateOne({ _id }, customer).then((customer) => {
-    console.info("Customer updated");
+// Update a car
+export const updateCar = (_id, car) => {
+  Cars.updateOne({ _id }, car).then((car) => {
+    console.info("Car updated");
     mongoose.disconnect();
   });
 };
 
-// Remove a customer
-export const removeCustomer = (_id) => {
-  Customer.deleteOne({ _id }).then((customer) => {
-    console.info("Customer removed");
+// Remove a car
+export const removeCar = (_id) => {
+  Cars.deleteOne({ _id }).then((car) => {
+    console.info("Car removed");
     mongoose.disconnect();
   });
 };
 
-// List all customers
-export const listCustomers = () => {
-  Customer.find().then((customers) => {
-    console.info(customers);
-    console.info(`${customers.length} customers`);
+// List all car
+export const listCars = () => {
+  Cars.find().then((cars) => {
+    console.info(cars);
+    console.info(`${cars.length} cars`);
     mongoose.disconnect();
   });
 };

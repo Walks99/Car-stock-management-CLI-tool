@@ -1,19 +1,21 @@
 {
-  "name": "customer-management-cli-tool",
+  "name": "car-stock-management-cli-tool",
   "type": "module",
   "version": "1.0.0",
-  "description": "Customer management CLI",
+  "description": "Car stock management CLI tool",
   "main": "index.js",
   "preferGlobal": true,
   "bin": "./commands.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "commander": "^11.1.0",
     "inquirer": "^9.2.12",
-    "mongoose": "^8.0.2"
+    "mongoose": "^8.0.2",
+    "node": "^21.2.0"
   }
 }
